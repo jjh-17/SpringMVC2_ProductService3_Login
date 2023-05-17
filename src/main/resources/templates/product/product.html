@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css"
+          th:href="@{/css/bootstrap.min.css}"
+          rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2 th:text="#{page.product}">상품 상세</h2>
+    </div>
+
+    <h2 th:if="${param.status}"
+        th:text="'저장 완료!'"></h2>
+
+    <div>
+        <label for="id" th:text="#{label.product.id}">상품 ID</label>
+        <input type="text" id="id" name="id" class="form-control"
+               value="1" th:value="${product.id}" readonly>
+    </div>
+    <div>
+        <label for="name" th:text="#{label.product.name}">상품명</label>
+        <input type="text" id="name" name="name" class="form-control"
+               value="상품A" th:value="${product.name}" readonly>
+    </div>
+    <div>
+        <label for="price" th:text="#{label.product.price}">가격</label>
+        <input type="text" id="price" name="price" class="form-control"
+               value="10000" th:value="${product.price}" readonly>
+    </div>
+    <div>
+        <label for="quantity" th:text="#{label.product.quantity}">수량</label>
+        <input type="text" id="quantity" name="quantity" class="form-control"
+               value="10" th:value="${product.quantity}" readonly>
+    </div>
+
+    <hr class="my-4">
+    <div class="row">
+        <div class="col">
+            <button class="w-100 btn btn-primary btn-lg"
+                    onclick="location.href='editForm.html'" th:text="#{page.updateProduct}"
+                    th:onclick="|location.href='@{/products/{productId}/edit(productId=${product.id})}'|"
+                    type="button">상품 수정</button>
+        </div>
+        <div class="col">
+            <button class="w-100 btn btn-secondary btn-lg"
+                    onclick="location.href='products.html'" th:text="#{page.products}"
+                    th:onclick="|location.href='@{/products}'|"
+                    type="button">목록으로</button>
+        </div>
+    </div>
+</div> <!-- /container -->
+</body>
+</html>
