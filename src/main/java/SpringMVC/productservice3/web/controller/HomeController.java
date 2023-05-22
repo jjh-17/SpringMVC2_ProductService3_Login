@@ -1,5 +1,6 @@
 package SpringMVC.productservice3.web.controller;
 
+import SpringMVC.productservice3.web.argumentresolver.Login;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -90,18 +91,36 @@ public class HomeController {
     세션을 생성하지 않음
     @SessionAttribute의 name과 변수의 이름이 동일해야함....?
     */
-    @GetMapping("/")
-    public String homeLogin3Spring(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMmember,
+    //@GetMapping("/")
+    public String homeLogin3Spring(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
                                Model model) {
 
-        if (loginMmember == null) {
+        if (loginMember == null) {
             log.info("세션에 회원 정보가 없다");
             return "home";
         }
 
         //세션이 유지되면 로그인으로 이동
         log.info("로그인 성공, 세션 생성");
-        model.addAttribute("member", loginMmember);
+        model.addAttribute("member", loginMember);
+        return "loginHome";
+    }
+
+    /*
+    [ArgumentResolver]
+    @Login 어노테이션을 직접 만들어 로그인 간소화
+    */
+    @GetMapping("/")
+    public String homeLogin3ArgumentResolver(@Login Member loginMember, Model model) {
+
+        if (loginMember == null) {
+            log.info("세션에 회원 정보가 없다");
+            return "home";
+        }
+
+        //세션이 유지되면 로그인으로 이동
+        log.info("로그인 성공, 세션 생성");
+        model.addAttribute("member", loginMember);
         return "loginHome";
     }
 }
