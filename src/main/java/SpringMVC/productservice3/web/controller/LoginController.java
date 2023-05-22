@@ -17,6 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /*
 [Form 전송 객체 분리]
@@ -109,7 +110,7 @@ public class LoginController {
     }
 
     //서블릿 HTTP 세션1
-    @PostMapping("/login")
+    //@PostMapping("/login")
     public String login3(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
                          BindingResult bindingResult, HttpServletRequest request) {
 
@@ -137,6 +138,38 @@ public class LoginController {
         session.setAttribute(SessionConst.LOGIN_MEMBER, member);
 
         return "redirect:/";
+    }
+
+    //URL에 적힌 redirectURL을 이용하여 로그인 성공 시 접근 실패 페이지로 이동
+    @PostMapping("/login")
+    public String login4(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
+                         BindingResult bindingResult, HttpServletRequest request,
+                         @RequestParam(defaultValue = "/") String redirectURL) {
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors = {}", bindingResult);
+            return "login/loginForm";
+        }
+
+        Member member = loginService.login(loginForm.getLoginId(), loginForm.getPassword());
+        if (member == null) {
+            bindingResult.reject("loginFail", "아이디 또는 비밀번호가 일치하지 않습니다.");
+            return "login/loginForm";
+        }
+
+        log.info("로그인 성공, 세션 생성");
+
+        /*
+        HttpSession: SessionManager와 동일하고 더 나은 기능 제공
+        request.getSession(true - default): 기존 세션 반환 / 없다면 새로운 세션을 생성하여 반환
+        request.getSession(false): 기존 세션 반환 / 없다면 null 반환
+         */
+        HttpSession session = request.getSession();
+
+        //세션에 로그인 회원 정보 보관
+        session.setAttribute(SessionConst.LOGIN_MEMBER, member);
+
+        return "redirect:" + redirectURL;
     }
 
     private void expireCookie(HttpServletResponse response, String cookieName) {
