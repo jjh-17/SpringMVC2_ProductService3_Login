@@ -36,16 +36,6 @@ public class MemberRepository {
 
     //로그인 아이디 기반 멤버 찾기
     public Optional<Member> findByLoginId(String id) {
-//        List<Member> all = findAll();
-//        for (Member m : all) {
-//            if (m.getLoginId() == id) {
-//                return Optional.of(m);
-//            }
-//        }
-//
-//        return Optional.empty();
-
-        //위에 것 대체
         return findAll().stream()
                 .filter(m -> m.getLoginId().equals(id))
                 .findFirst();

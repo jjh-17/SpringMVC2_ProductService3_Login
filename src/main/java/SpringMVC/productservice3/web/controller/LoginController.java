@@ -51,7 +51,7 @@ public class LoginController {
     -쿠키에 보관된 데이터는 접근이 쉬워 중요 정보 숨기기가 어려움
     -해커가 쿠키를 악용할 수 있음
      */
-    //@PostMapping("/login")
+//    @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
                          BindingResult bindingResult, HttpServletResponse response) {
 
@@ -88,7 +88,7 @@ public class LoginController {
     4. 클라이언트가 서버에 세션 ID 쿠키를 전달하며 요청
     5. 서버는 세션 ID로 세션 저장소르 조회, 로그인시 보관한 세션 정보 사용
      */
-    //@PostMapping("/login")
+//    @PostMapping("/login")
     public String login2(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
                          BindingResult bindingResult, HttpServletResponse response) {
 
@@ -110,7 +110,7 @@ public class LoginController {
     }
 
     //서블릿 HTTP 세션1
-    //@PostMapping("/login")
+//    @PostMapping("/login")
     public String login3(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
                          BindingResult bindingResult, HttpServletRequest request) {
 

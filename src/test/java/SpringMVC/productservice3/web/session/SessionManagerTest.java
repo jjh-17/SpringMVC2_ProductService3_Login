@@ -2,12 +2,15 @@ package SpringMVC.productservice3.web.session;
 
 import SpringMVC.productservice3.domain.member.Member;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class SessionManagerTest {
+@ExtendWith(SpringExtension.class)
+public class SessionManagerTest {
 
     SessionManager sessionManager = new SessionManager();
 
@@ -15,7 +18,7 @@ class SessionManagerTest {
     public void sessionTest() throws Exception {
         //세션 생성
         MockHttpServletResponse response = new MockHttpServletResponse(); //테스트용 가짜 서블렛
-        Member member = new Member();
+        Member member = Member.builder().loginId("loginId").name("name").password("password").build();
         sessionManager.createSession(member, response);
 
         //요청에 응답 쿠키 저장
