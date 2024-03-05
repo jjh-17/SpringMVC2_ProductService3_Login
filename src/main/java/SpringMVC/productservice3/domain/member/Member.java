@@ -1,6 +1,7 @@
 package SpringMVC.productservice3.domain.member;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.Builder;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -19,6 +20,7 @@ public class Member {
     @NotEmpty
     private String password;
 
+    @Builder
     public Member(String name, String loginId, String password) {
         this.name = name;
         this.loginId = loginId;

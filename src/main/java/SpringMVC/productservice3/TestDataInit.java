@@ -17,10 +17,11 @@ public class TestDataInit {
     //테스트용 데이터 추가
     @PostConstruct
     public void testInit() {
-        productRepository.save(new Product("A", 10000, 10));
-        productRepository.save(new Product("B", 20000, 20));
+        productRepository.save(Product.builder().name("A").price(10000).quantity(10).build());
+        productRepository.save(Product.builder().name("B").price(20000).quantity(20).build());
 
-        memberRepository.save(new Member("tester1", "testID1", "testPW1"));
-        memberRepository.save(new Member("tester2", "testID2", "testPW2"));
+
+        memberRepository.save(Member.builder().name("tester1").loginId("testID1").password("testPW1").build());
+        memberRepository.save(Member.builder().name("tester2").loginId("testID2").password("testPW2").build());
     }
 }
