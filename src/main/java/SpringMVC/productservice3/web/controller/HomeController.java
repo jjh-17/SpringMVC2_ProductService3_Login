@@ -65,7 +65,7 @@ public class HomeController {
     }
 
     // memberID 쿠키 정보를 활용하는 홈 화면
-    @GetMapping("/")
+    // @GetMapping("/")
     public String homeLogin3(HttpServletRequest request, Model model) {
 
         //세션 조회
@@ -81,20 +81,13 @@ public class HomeController {
         return "loginHome";
     }
 
-    /*
-    [서블릿 HTTP 세션2]
-    @SessionAttribute: 스프링이 제공하는 세션 사용 용이 어노테이션
-    세션을 생성하지 않음
-    @SessionAttribute의 name과 변수의 이름이 동일해야함....?
-    */
-    //@GetMapping("/")
-    public String homeLogin3Spring(@SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
-                               Model model) {
+    // 세션 체크 간소화
+    @GetMapping("/")
+    public String homeLogin3Spring(
+            @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
+            Model model) {
 
-        if (loginMember == null) {
-            log.info("세션에 회원 정보가 없다");
-            return "home";
-        }
+        if (loginMember == null) return "home";
 
         //세션이 유지되면 로그인으로 이동
         log.info("로그인 성공, 세션 생성");
