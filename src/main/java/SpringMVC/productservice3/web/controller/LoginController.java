@@ -167,15 +167,11 @@ public class LoginController {
         return "redirect:/";
     }
 
-    //로그아웃 시 HttpSession 정보 제거
+    // 로그아웃 시 HttpSession 정보 제거
     @PostMapping("/logout")
     public String logout3(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null) {
-            //세션 제거
-            session.invalidate();
-        }
-
+        if (session != null)    session.invalidate();
         return "redirect:/";
     }
 }

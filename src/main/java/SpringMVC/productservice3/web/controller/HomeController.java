@@ -64,21 +64,17 @@ public class HomeController {
         return "loginHome";
     }
 
-    //memberID 쿠키 정보를 활용하는 홈 화면
-    //@GetMapping("/")
+    // memberID 쿠키 정보를 활용하는 홈 화면
+    @GetMapping("/")
     public String homeLogin3(HttpServletRequest request, Model model) {
 
         //세션 조회
         HttpSession session = request.getSession(false);
-        if (session == null) {
-            return "home";
-        }
+        if (session == null) return "home";
 
         //세션에 저장된 회원 정보 조회
         Member member = (Member) session.getAttribute(SessionConst.LOGIN_MEMBER);
-        if (member == null) {
-            return "home";
-        }
+        if (member == null) return "home";
 
         //세션이 유지되면 로그인
         model.addAttribute("member", member);
