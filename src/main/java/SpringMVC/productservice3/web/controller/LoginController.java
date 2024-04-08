@@ -43,15 +43,8 @@ public class LoginController {
         return "login/loginForm";
     }
 
-    /*
-    로그인 성공 시 세션 쿠키를 생성하여 브라우저 종료 시까지 로그인 정보 유지
-
-    [보안 문제]
-    -클라이언트가 임의로 쿠키 값 변경 가능
-    -쿠키에 보관된 데이터는 접근이 쉬워 중요 정보 숨기기가 어려움
-    -해커가 쿠키를 악용할 수 있음
-     */
-//    @PostMapping("/login")
+    // 로그인 성공 시 세션 쿠키를 생성하여 브라우저 종료 시까지 로그인 정보 유지
+    // @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
                          BindingResult bindingResult, HttpServletResponse response) {
 
@@ -76,19 +69,8 @@ public class LoginController {
         return "redirect:/";
     }
 
-    /*
-    [로그인 처리 - 세션 동작 방식]
-    세션: 서버에 중요한 정보를 보관하고 연결을 유지하는 방법
-
-    [흐름]
-    1. 사용자가 loginID, password 정보를 전달 ==> 서버에서 사용자 확인
-    2. UUID로 생성한 세션 ID와 보관할 값을 서버의 세션 저장소에 보관
-    3. 서버는 쿠키에 세션 ID를 담아 클라이언트에게 전달하고, 클라이언트는 쿠키 저장소에 세션 ID 보관
-            ==> 회원 관련 정보는 클라이언트에게 전달되지 않으며, 추정 불가능한 세선 ID만 쿠키로 전달된다
-    4. 클라이언트가 서버에 세션 ID 쿠키를 전달하며 요청
-    5. 서버는 세션 ID로 세션 저장소르 조회, 로그인시 보관한 세션 정보 사용
-     */
-//    @PostMapping("/login")
+    // 로그인 처리 - 세션 동작 방식
+    // @PostMapping("/login")
     public String login2(@Valid @ModelAttribute("loginForm") LoginForm loginForm,
                          BindingResult bindingResult, HttpServletResponse response) {
 
