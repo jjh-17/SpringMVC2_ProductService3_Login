@@ -6,7 +6,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.UUID;
 
 @Slf4j
@@ -20,11 +19,6 @@ public class LogInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String uuid = UUID.randomUUID().toString();
 
-        /*
-        서블릿 필터와는 달리, 스프링 인터셉터는 호출 시점이 완전히 분리되어 있음
-            ==> preHandle에서 지정한 값을 request에 담아 postHandle, afterCompletion에서 사용할 수 있도록 한다.
-                ==> 인터셉터는 싱글톤처럼 사용되므로 멤버변수 대신 request에 담는다
-         */
         request.setAttribute(LOG_ID, uuid);
 
         //@RequestMapping: HandlerMethod
