@@ -25,14 +25,11 @@ public class SessionInfoController {
         session.getAttributeNames().asIterator()
                 .forEachRemaining(name -> log.info("session name={}, value={}", name, session.getAttribute(name)));
 
-        log.info("sessionId={}", session.getId()); //jsessionid 값
-        log.info("maxInactiveInterval={}", session.getMaxInactiveInterval()); //세션의 유효 시간(초)
-        log.info("creationTime={}", new Date(session.getCreationTime())); //세션 생성일시
-
-        //세션과 연결된 사용자가 서버에 접근한 가장 최근 시간
-        //클라이언트가 서버로 sessionID를 요청한 경우 갱신
-        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));
-        log.info("isNew={}", session.isNew()); ///새로 만든 세션인가 조회한 세션인가
+        log.info("sessionId={}", session.getId());                                  // jsessionid 값
+        log.info("maxInactiveInterval={}", session.getMaxInactiveInterval());       // 세션의 유효 시간(초)
+        log.info("creationTime={}", new Date(session.getCreationTime()));           // 세션 생성일시
+        log.info("lastAccessedTime={}", new Date(session.getLastAccessedTime()));   // 세션과 연결된 사용자가 서버에 접근한 가장 최근 시간
+        log.info("isNew={}", session.isNew());                                      // 새로 만든 세션인가 조회한 세션인가
 
         return "세션 출력";
     }
