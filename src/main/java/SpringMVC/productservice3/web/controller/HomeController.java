@@ -82,7 +82,7 @@ public class HomeController {
     }
 
     // 세션 체크 간소화
-    @GetMapping("/")
+//    @GetMapping("/")
     public String homeLogin3Spring(
             @SessionAttribute(name=SessionConst.LOGIN_MEMBER, required = false) Member loginMember,
             Model model) {
@@ -99,7 +99,7 @@ public class HomeController {
     [ArgumentResolver]
     @Login 어노테이션을 직접 만들어 로그인 간소화
     */
-    // @GetMapping("/")
+    @GetMapping("/")
     public String homeLogin3ArgumentResolver(@Login Member loginMember, Model model) {
 
         if (loginMember == null) {
