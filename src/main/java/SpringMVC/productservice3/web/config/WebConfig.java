@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import java.util.List;
 
 @Configuration
@@ -22,9 +21,9 @@ public class WebConfig implements WebMvcConfigurer {
     public FilterRegistrationBean logFilter() {
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
 
-        filterFilterRegistrationBean.setFilter(new LogFilter()); //적용할 필터 설정
-        filterFilterRegistrationBean.setOrder(1); //순서 설정
-        filterFilterRegistrationBean.addUrlPatterns("/*"); //적용 URL 설정 ==> 전체
+        filterFilterRegistrationBean.setFilter(new LogFilter());    //적용할 필터 설정
+        filterFilterRegistrationBean.setOrder(1);                   //순서 설정
+        filterFilterRegistrationBean.addUrlPatterns("/*");          //적용 URL 설정 ==> 전체
 
         return filterFilterRegistrationBean;
     }
@@ -34,8 +33,8 @@ public class WebConfig implements WebMvcConfigurer {
         FilterRegistrationBean<Filter> filterFilterRegistrationBean = new FilterRegistrationBean<>();
 
         filterFilterRegistrationBean.setFilter(new LoginCheckFilter()); //적용할 필터 설정
-        filterFilterRegistrationBean.setOrder(2); //순서 설정
-        filterFilterRegistrationBean.addUrlPatterns("/*"); //적용 URL 설정 ==> 전체
+        filterFilterRegistrationBean.setOrder(2);                       //순서 설정
+        filterFilterRegistrationBean.addUrlPatterns("/*");              //적용 URL 설정 ==> 전체
 
         return filterFilterRegistrationBean;
     }
@@ -44,14 +43,14 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogInterceptor())
-                .order(1)
-                .addPathPatterns("/**") //모든 URL
-                .excludePathPatterns("/css/**", "/*.ico", "/error");
+                .order(1)                                                   // 순서 1
+                .addPathPatterns("/**")                                     // 모든 URL
+                .excludePathPatterns("/css/**", "/*.ico", "/error");        // 제외 URL
 
         registry.addInterceptor(new LoginCheckInterceptor())
-                .order(2)
-                .addPathPatterns("/**") //모든 URL
-                .excludePathPatterns("/css/**", "/*.ico", "/error", "/",
+                .order(2)                                                   // 순서 2
+                .addPathPatterns("/**")                                     // 모든 URL
+                .excludePathPatterns("/css/**", "/*.ico", "/error", "/",    // 제외 URL
                         "/members/add", "/login", "/logout");
     }
 
